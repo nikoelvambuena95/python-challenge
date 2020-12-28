@@ -1,9 +1,27 @@
-# total number of months
+# import the os module to allow file paths across operating systems
+import os
 
-# total amount Profits/Losses
+#import the reader module to read csv files
+import csv
 
-# avergae change in Profits/Losses
+bank_csvpath = os.path.join('..','pybank.csv')
 
-# greatest increase in Profits
+with open(bank_csvpath, newline ='', encoding='utf-8') as csvfile:
+    bankfile = csv.reader(csvfile, delimiter=',')
+    bankfile_header = next(bankfile)
+    
+    for row in bankfile:
+        months = str(row[0])
+        
+        profit_loss = int(row[1])
+        
 
-# freates decrease in Losses
+#total number of months
+
+#total amount Profits/Losses
+
+#avergae change in Profits/Losses
+
+#greatest increase in Profits
+
+#greatest decrease in Losses
