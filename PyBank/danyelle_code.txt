@@ -1,0 +1,10 @@
+for n in range (1, Months):
+	TotalProfits += Profits[n]
+	CurrentChange = Profits[n] - Profits[n-1]
+	TotaledChanges += CurrentChange
+
+	if CurrentChange > BigInc:
+		BigInc = CurrentChange
+	elif CurrentChange < BigDec:
+		BigDec = CurrentChange
+		BigDecDate = Dates[n]
