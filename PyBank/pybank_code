@@ -6,6 +6,12 @@ import csv
 
 bank_csvpath = os.path.join('..','pybank.csv')
 
+month = []
+profitloss = []
+pl_increase = 0
+pl_decrease = 0
+total_change = []
+
 with open(bank_csvpath, encoding='utf-8') as csvfile:
     bankfile = csv.reader(csvfile)
     bankfile_header = next(bankfile)
@@ -13,8 +19,21 @@ with open(bank_csvpath, encoding='utf-8') as csvfile:
     for row in bankfile:
         month.append(row[0])
         profitloss.append(int(row[1]))
+    for x in range(len(profitloss)):
+        pl_change = profitloss[x] - profitloss[x-1]
+        total_change.append(pl_change)
+        if pl_change > pl_increase:
+            pl_increase = pl_change
+            pl_increase_date = month[x]
+        elif pl_change < pl_decrease:
+            pl_decrease = pl_change
+            pl_decrease_date = month[x]
     total_profitloss = sum(profitloss)
-    print(total_profitloss)
-    #average_profitloss = mean(profitloss)
-    greatest_inc_profitloss = max(profitloss)
-    greatest_dec_profitloss = min(profitloss)
+
+print("Financial Analysis")
+print("----------")
+print(f"Total Months: {len(month)}")
+print(f"Total: {'${:,.2f}'.format(total_profitloss)}")
+print(f"Average Change: {'${:,.2f}'.format(sum(total_change)/len(profitloss))}")
+print(f"Greatest Increase in Profits: {'${:,.2f}'.format(pl_increase)} on {pl_increase_date}")
+print(f"Greatest Decrease in Profits: {'${:,.2f}'.format(pl_decrease)} on {pl_decrease_date}")

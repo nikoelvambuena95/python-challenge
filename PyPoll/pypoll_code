@@ -1,0 +1,17 @@
+#import os module creating file paths across operating systems
+import os
+
+#import the reader module to read csv files
+import csv
+
+bank_csvpath = os.path.join('..','pybank.csv')
+
+votes = []
+
+with open(poll_csvpath, encoding='utf-8') as csvfile:
+    pollfile = csv.reader(csvfile)
+    pollfile_header = next(pollfile)
+    
+    for row in pollfile:
+        votes.append(row[0])
+    print(votes)
